@@ -9,6 +9,17 @@ import Starkscan from '../../images/Starkscan.png';
 import { FaEthereum, FaGithub } from 'react-icons/fa';
 import { IoPlanet } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
+import * as data0 from '../../provisions-data/starknet/starknet-0.json';
+// import * as data1 from "../../provisions-data/starknet/starknet-1.json"
+// import * as data2 from "../../provisions-data/starknet/starknet-2.json"
+// import * as data3 from "../../provisions-data/starknet/starknet-3.json"
+// import * as data4 from "../../provisions-data/starknet/starknet-4.json"
+// import * as data5 from "../../provisions-data/starknet/starknet-5.json"
+// import * as data6 from "../../provisions-data/starknet/starknet-6.json"
+// import * as data7 from "../../provisions-data/starknet/starknet-7.json"
+// import * as data8 from "../../provisions-data/starknet/starknet-8.json"
+// import * as data9 from "../../provisions-data/starknet/starknet-9.json"
+// import * as data10 from "../../provisions-data/starknet/starknet-10.json"
 
 const App = () => {
 	const initialState = () => getData('data') || [];
@@ -20,7 +31,26 @@ const App = () => {
 
 	const handleChange = (val) => {
 		// Check the value object in the json file
-		val.amount = '0';
+		var matches = data0.eligibles.filter(function (value) {
+			return value.identity === val.address;
+		});
+		console.log(matches[0]);
+		val.address = matches[0].identity;
+		val.amount = matches[0].amount;
+		val.merkleIndex = matches[0].merkle_index;
+		val.merklePath = matches[0].merkle_path;
+		val.params =
+			matches[0].identity +
+			',' +
+			matches[0].amount +
+			',' +
+			'0' +
+			',' +
+			matches[0].merkle_index +
+			',' +
+			matches[0].merkle_path.length.toString() +
+			',' +
+			matches[0].merkle_path.join();
 		val.id = uuidv4();
 		let newVal = [...state, val];
 		setState(newVal);

@@ -79,7 +79,7 @@ label {
 }
 
 .card-data {
-	display: flex;
+	display: grid;
 	justify-content: space-around;
 }
 

@@ -4,7 +4,7 @@ import '../App/App.css';
 
 const initialValues = {
 	address:
-		'0x018a0042b39b96942f5e3d927ac561febd42c02c044cbdb6edc5ab9f2d71b577',
+		'0x079b7564882ddefd1c78dd31776ce5dc36c824d595c6f3aff982209bfff2fd2e',
 	// amount: 0,
 	// merkleIndex: 0,
 	// merklePath: []
@@ -15,8 +15,6 @@ const CheckForm = ({ change }) => {
 
 	const handleChange = (e) => {
 		let { value } = e.target;
-		// TODO: starknet address checksum
-
 		setState({
 			address: value,
 		});
