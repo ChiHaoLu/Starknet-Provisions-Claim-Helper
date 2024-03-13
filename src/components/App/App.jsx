@@ -9,31 +9,32 @@ import Starkscan from '../../images/Starkscan.png';
 import { FaEthereum, FaGithub } from 'react-icons/fa';
 import { IoPlanet } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
-import * as data0 from '../../provisions-data/starknet/starknet-0.json';
-// import * as data1 from "../../provisions-data/starknet/starknet-1.json"
-// import * as data2 from "../../provisions-data/starknet/starknet-2.json"
-// import * as data3 from "../../provisions-data/starknet/starknet-3.json"
-// import * as data4 from "../../provisions-data/starknet/starknet-4.json"
-// import * as data5 from "../../provisions-data/starknet/starknet-5.json"
-// import * as data6 from "../../provisions-data/starknet/starknet-6.json"
-// import * as data7 from "../../provisions-data/starknet/starknet-7.json"
-// import * as data8 from "../../provisions-data/starknet/starknet-8.json"
-// import * as data9 from "../../provisions-data/starknet/starknet-9.json"
-// import * as data10 from "../../provisions-data/starknet/starknet-10.json"
+import PacmanLoader from 'react-spinners/PacmanLoader';
 
 const App = () => {
 	const initialState = () => getData('data') || [];
 	const [state, setState] = useState(initialState);
+	const [searching, setSearching] = useState(false);
 
 	useEffect(() => {
 		storeData('data', state);
 	}, [state]);
 
-	const handleChange = (val) => {
+	const handleChange = async (val) => {
 		// Check the value object in the json file
-		var matches = data0.eligibles.filter(function (value) {
-			return value.identity === val.address;
-		});
+		var matches = [];
+		setSearching(true);
+		for (var i = 0; i <= 10 && matches.length === 0; i++) {
+			const data = await import(
+				'../../provisions-data/starknet/starknet-' +
+					i.toString() +
+					'.json'
+			);
+			matches = data.eligibles.filter(function (value) {
+				return value.identity === val.address;
+			});
+		}
+		setSearching(false);
 		console.log(matches[0]);
 		val.address = matches[0].identity;
 		val.amount = matches[0].amount;
@@ -86,6 +87,13 @@ const App = () => {
 						</div>
 						<img alt="starkscan" src={Starkscan} width="750" />
 						<CheckForm change={handleChange} />
+						<PacmanLoader
+							color={'#ec796b'}
+							loading={searching}
+							size={50}
+							aria-label="Loading Spinner"
+							data-testid="loader"
+						/>
 						<div className="data-container row">
 							{state.length > 0 ? (
 								<>

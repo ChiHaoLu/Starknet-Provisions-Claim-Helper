@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const Info = ({
@@ -12,11 +12,6 @@ const Info = ({
 }) => {
 	const handleDelete = () => {
 		deleteCard(id);
-	};
-
-	const copy = () => {
-		navigator.clipboard.writeText(params);
-		alert('Copied the text: ' + params);
 	};
 
 	return (
