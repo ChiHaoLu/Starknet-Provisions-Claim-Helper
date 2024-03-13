@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import '../App/App.css';
 
 const initialValues = {
-	address: '0x018a0042b39b96942f5e3d927ac561febd42c02c044cbdb6edc5ab9f2d71b577',
+	address:
+		'0x018a0042b39b96942f5e3d927ac561febd42c02c044cbdb6edc5ab9f2d71b577',
 	// amount: 0,
 	// merkleIndex: 0,
 	// merklePath: []
-}
+};
 
 const CheckForm = ({ change }) => {
 	const [state, setState] = useState(initialValues);
 
-	const handleChange = e => {
+	const handleChange = (e) => {
 		let { value } = e.target;
 		// TODO: starknet address checksum
-		
+
 		setState({
 			address: value,
 		});
@@ -57,7 +58,7 @@ const CheckForm = ({ change }) => {
 };
 
 CheckForm.propTypes = {
-	change: PropTypes.func.isRequired
+	change: PropTypes.func.isRequired,
 };
 
 export default CheckForm;

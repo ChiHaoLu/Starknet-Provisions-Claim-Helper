@@ -1,18 +1,18 @@
 language: node_js
 node_js:
-  - 16.19.1
+    - 16.19.1
 cache: npm
 
 install:
-  - npm install
+    - npm install
 
 script:
-  - npm run build
+    - npm run build
 
 deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  local_dir: build
-  on:
-    branch: master
+    provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    local_dir: build
+    on:
+        branch: master
