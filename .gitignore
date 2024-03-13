@@ -8,8 +8,8 @@
 # testing
 /coverage
 
-# production
-/build
+# do not igonre the production, pre-built it for vercel to avoid At least one "Out of Memory" ("OOM") event was detected during the build.
+# /build
 
 # misc
 .DS_Store
